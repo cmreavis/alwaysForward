@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Activity>
+
+<h2>Activities</h2>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Completed?</th>
+        <th>Category ID</th>
+    </tr>
+
+    @foreach (var activity in @Model)
+    {
+        <tr>
+            <td>@activity.ActivityID</td>
+            <td>@activity.ActivityName</td>
+            <td>@activity.Description</td>
+            <td>@activity.isCompleted</td>
+            <td>@activity.CategoryID</td>
+        </tr>
+    }
+
+</table>
