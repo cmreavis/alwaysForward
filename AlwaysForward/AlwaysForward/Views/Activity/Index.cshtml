@@ -13,7 +13,7 @@
     @foreach (var activity in @Model)
     {
         <tr>           
-            <td>@activity.ActivityName</td>
+            <td><a href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a></td>
             <td>@activity.Description</td>
             <td>@activity.isCompleted</td>
             <td>@activity.CategoryID</td>

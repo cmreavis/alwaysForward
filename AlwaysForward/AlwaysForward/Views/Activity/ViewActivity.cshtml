@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "ViewActivity";
+}
+
+<h1>ViewActivity</h1>
+
+@model Activity
+<h3>@Model.Name</h3>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Complete?</th>
+    </tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.Description</td>
+        <td>@Model.CategoryID</td>
+        <td>@Model.isCompleted</td>
+    </tr>
+</table>

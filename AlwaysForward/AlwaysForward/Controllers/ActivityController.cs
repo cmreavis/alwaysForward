@@ -22,5 +22,16 @@ namespace AlwaysForward.Controllers
             var activities = repo.GetAllActivities();
             return View(activities);
         }
+
+        public IActionResult ViewActivity(int id)
+        {
+            var activity = repo.GetActivity(id);
+            return View(activity);
+        }
+
+        //public IActionResult UpdateActivity()
+        //{
+        //    Activity act = repo.
+        //}
     }
 }
