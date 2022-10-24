@@ -13,7 +13,6 @@ namespace AlwaysForward
             _conn = conn;
         }
 
-        //POST
 
         //GET
         public IEnumerable<Activity> GetAllActivities()
@@ -21,8 +20,25 @@ namespace AlwaysForward
             return _conn.Query<Activity>("SELECT * FROM ACTIVITIES;");
         }
 
-        //PUT
 
+        //POST
+        void IActivityRepository.InsertActivity(Activity activityToInsert)
+        {
+            _conn.Execute("INSERT INTO activites (Name, Description, Complete) VALUES (@activityName, @description, 0);",
+                new { activityName = activityToInsert.ActivityName, description = activityToInsert.Description });
+        }
+
+        //PUT
+        void IActivityRepository.UpdateActivity(Activity activity)
+        {
+            throw new NotImplementedException();
+        }
         //DELETE
+        void IActivityRepository.DeleteActivity(Activity activity)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }
