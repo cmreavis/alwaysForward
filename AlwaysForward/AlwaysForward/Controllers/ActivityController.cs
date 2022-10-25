@@ -15,8 +15,20 @@ namespace AlwaysForward.Controllers
         {
             this.repo = repo;
         }
+        //CREATE
+        public IActionResult InsertActivity()
+        {
+            var act = repo.AssignCategory();
+            return View(act);
+        }
 
+        public IActionResult InsertActivityToDatabase(Activity activityToInsert)
+        {
+            repo.InsertActivity(activityToInsert);
+            return RedirectToAction("Index");
+        }
 
+        //READ
         public IActionResult Index()
         {
             var activities = repo.GetAllActivities();
@@ -29,9 +41,36 @@ namespace AlwaysForward.Controllers
             return View(activity);
         }
 
-        //public IActionResult UpdateActivity()
-        //{
-        //    Activity act = repo.
-        //}
+        //UPDATE
+        public IActionResult UpdateActivity(int id)
+        {
+            var activity = repo.AssignCategory(); //Empty activity model with list of categories
+
+            Activity act = repo.GetActivity(id); //Gets rest of activity at id
+            if (act == null)
+            {
+                return View("ActivityNotFound");
+            }
+
+            act.Categories = activity.Categories; //Sets IEnumerable of categories to the grabbed cats from AssignCategory() above
+
+            return View(act);
+        }
+
+        public IActionResult UpdateActivityToDatabase(Activity act)
+        {
+            repo.UpdateActivity(act);
+
+            return RedirectToAction("ViewActivity", new { id = act.ActivityID });
+        }
+
+        //DELETE
+        public IActionResult DeleteActivity(Activity act)
+        {
+            repo.DeleteActivity(act);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

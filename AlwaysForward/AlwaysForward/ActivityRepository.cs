@@ -13,41 +13,55 @@ namespace AlwaysForward
             _conn = conn;
         }
 
+        //CREATE
+        public void InsertActivity(Activity activityToInsert)
+        {
+            _conn.Execute("INSERT INTO ACTIVITIES (Name, Description, Complete, CategoryID) VALUES (@activityName, @description, 0, @categoryID );",
+                new { activityName = activityToInsert.Name, description = activityToInsert.Description, categoryID = activityToInsert.CategoryID });
+        }
 
-        //GET
+        //READ
         public IEnumerable<Activity> GetAllActivities()
         {
             return _conn.Query<Activity>("SELECT * FROM ACTIVITIES;");
         }
-
         public Activity GetActivity(int id)
         {
             return _conn.QuerySingle<Activity>("SELECT * FROM ACTIVITIES WHERE ActivityID = @id;", 
                 new { id = id });
         }
-
-        //POST
-        public void InsertActivity(Activity activityToInsert)
+        public IEnumerable<ActivityCategory> GetActivityCategories()
         {
-            _conn.Execute("INSERT INTO activites (Name, Description, Complete) VALUES (@activityName, @description, 0);",
-                new { activityName = activityToInsert.Name, description = activityToInsert.Description });
+            return _conn.Query<ActivityCategory>("SELECT * FROM categories;");
         }
 
-        //PUT
+
+        //UPDATE
+        public Activity AssignCategory()
+        {
+            var categoryList = GetActivityCategories();
+            var activity = new Activity();
+            activity.Categories = categoryList;
+            return activity;
+        }
         public void UpdateActivity(Activity activity)
         {
-            _conn.Execute("UPDATE activities SET Name = @activityName, Description = @description WHERE ActivityID = @id;", 
-                new { activityName = activity.Name, description = activity.Description, id = activity.ActivityID });
+            _conn.Execute("UPDATE activities SET Name = @activityName, Description = @description, CategoryID = @categoryID WHERE ActivityID = @id;", 
+                new { activityName = activity.Name, description = activity.Description, categoryID = activity.CategoryID, id = activity.ActivityID });
         }
         public void ActivityComplete(Activity activity)
         {
-            _conn.Execute("UPDATE activites SET complete = ")
+            _conn.Execute("UPDATE activites SET complete = 1 WHERE ActivityID = @id;",
+                new { id = activity.ActivityID });
         }
+
         //DELETE
         public void DeleteActivity(Activity activity)
         {
-            throw new NotImplementedException();
+            _conn.Execute("DELETE FROM activities WHERE ActivityID = @id;", 
+                new { id = activity.ActivityID });
         }
+
 
     }
 }

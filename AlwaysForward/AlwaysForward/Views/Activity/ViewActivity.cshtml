@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "ViewActivity";
+    ViewData["Title"] = $"{@Model.Name}";
 }
 
-<h1>ViewActivity</h1>
+<h1>Task View</h1>
 
 @model Activity
 <h3>@Model.Name</h3>
@@ -22,3 +22,15 @@
         <td>@Model.isCompleted</td>
     </tr>
 </table>
+
+<div style="display: block">
+    <a href="/Activity/UpdateActivity/@Model.ActivityID">Update Task?</a>    
+</div>
+
+<div style="display: block">
+    @using (Html.BeginForm("DeleteActivity", "Activity", "Post"))
+    {
+        <input type="hidden" asp-for="ActivityID" value="@Model.ActivityID" />
+        <input type="submit" onclick="return confirm('Delete this task?')" value="Delete this task" />
+    }
+</div>
