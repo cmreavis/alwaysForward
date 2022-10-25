@@ -12,6 +12,6 @@
         public string Description { get; set; }
         public bool isCompleted { get; set; }
         public int CategoryID { get; set; }
-
+        public virtual ApplicationUser User { get; set; }
     }
 }

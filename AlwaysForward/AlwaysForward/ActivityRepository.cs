@@ -20,27 +20,31 @@ namespace AlwaysForward
             return _conn.Query<Activity>("SELECT * FROM ACTIVITIES;");
         }
 
-        Activity IActivityRepository.GetActivity(int id)
+        public Activity GetActivity(int id)
         {
-            return _conn.QuerySingle("SELECT * FROM ACTIVITIES WHERE ActivityID = @id;", 
+            return _conn.QuerySingle<Activity>("SELECT * FROM ACTIVITIES WHERE ActivityID = @id;", 
                 new { id = id });
         }
 
         //POST
-        void IActivityRepository.InsertActivity(Activity activityToInsert)
+        public void InsertActivity(Activity activityToInsert)
         {
             _conn.Execute("INSERT INTO activites (Name, Description, Complete) VALUES (@activityName, @description, 0);",
                 new { activityName = activityToInsert.Name, description = activityToInsert.Description });
         }
 
         //PUT
-        void IActivityRepository.UpdateActivity(Activity activity)
+        public void UpdateActivity(Activity activity)
         {
             _conn.Execute("UPDATE activities SET Name = @activityName, Description = @description WHERE ActivityID = @id;", 
                 new { activityName = activity.Name, description = activity.Description, id = activity.ActivityID });
         }
+        public void ActivityComplete(Activity activity)
+        {
+            _conn.Execute("UPDATE activites SET complete = ")
+        }
         //DELETE
-        void IActivityRepository.DeleteActivity(Activity activity)
+        public void DeleteActivity(Activity activity)
         {
             throw new NotImplementedException();
         }
