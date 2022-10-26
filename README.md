@@ -1,6 +1,6 @@
 # alwaysForward
 
-Always Forward is the final project for my coding bootcamp in the form of an ASP.NET Core Web application.\
+Always Forward is the final project for my coding bootcamp in the form of an ASP.NET Core Web application.
 
 the idea is to create a habit tracker/daily task application that contains functions I would want in my ideal app\
 as well as mindfulness/therapeutic elements that I am interested in.
