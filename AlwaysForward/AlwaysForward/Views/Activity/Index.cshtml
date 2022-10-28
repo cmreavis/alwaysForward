@@ -7,21 +7,22 @@
 </div>
 
 <table class="table">
-    <tr>       
+    <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Completed?</th>
-        <th>Category ID</th>
+        <th>Task Category</th>
     </tr>
 
     @foreach (var activity in @Model)
     {
-        <tr>           
-            <td><a href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a></td>
+        <tr>
+            <td>
+                <input type="checkbox" checked="@activity.isCompleted" onclick="window.location.href = './Index';" />
+                <a href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a>
+            </td>
             <td>@activity.Description</td>
-            <td>@activity.isCompleted</td>
-            <td>@activity.CategoryID</td>
+            <td>@activity.CategoryName</td>
         </tr>
     }
-
+    
 </table>

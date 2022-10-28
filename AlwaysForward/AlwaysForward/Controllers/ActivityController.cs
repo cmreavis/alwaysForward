@@ -63,7 +63,15 @@ namespace AlwaysForward.Controllers
 
             return RedirectToAction("ViewActivity", new { id = act.ActivityID });
         }
-
+        public IActionResult ActivityCompleteToggle(int id)
+        {
+            var act = repo.GetActivity(id);
+            if (act != null)
+            {
+                act.isCompleted = !act.isCompleted;
+            }
+            return RedirectToAction("Index");
+        }
         //DELETE
         public IActionResult DeleteActivity(Activity act)
         {
