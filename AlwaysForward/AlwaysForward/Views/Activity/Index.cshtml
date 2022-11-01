@@ -1,27 +1,21 @@
 ﻿@model IEnumerable<Activity>
 
-<h2>Daily Tasks</h2>
+<h2 class="list-header">Your Daily Tasks</h2>
 
-<div style="display: block">
-    <a href="/Activity/InsertActivity/">Add a new Task?</a>
-</div>
 
-<table class="table">
+<table class="task-table">
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Task Category</th>
+        <th>Category</th>
+        <th></th>
     </tr>
 
     @foreach (var activity in @Model)
     {
         <tr>
-            <td>
-                    <input type="checkbox" name="IsCompleted" checked="@activity.IsCompleted" value="true" />
-                    <input name="IsCompleted" type="hidden" value="false" />
-                
-                <a href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a>
-            </td>
+            
+            <td><a class="checkbox-text" href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a></td>
             <td>@activity.Description</td>
             <td>@switch(activity.CategoryID)
                 {
@@ -46,6 +40,14 @@
                 }
                 @activity.CategoryName
             </td>
+                <td class="checkbox-text">
+                <input type="checkbox" name="IsCompleted" checked="@activity.IsCompleted" value="true" />
+                        <input name="IsCompleted" type="hidden" value="false" />
+                </td>
             </tr>
     }
 </table>
+
+<div class="buttons-addtask">
+    <a class="buttontext" href="/Activity/InsertActivity/">Add a new Task?</a>
+</div>
