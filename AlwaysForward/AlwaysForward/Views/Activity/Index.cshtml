@@ -17,12 +17,35 @@
     {
         <tr>
             <td>
-                <input type="checkbox" checked="@activity.isCompleted" onclick="window.location.href = './Index';" />
+                    <input type="checkbox" name="IsCompleted" checked="@activity.IsCompleted" value="true" />
+                    <input name="IsCompleted" type="hidden" value="false" />
+                
                 <a href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a>
             </td>
             <td>@activity.Description</td>
-            <td>@activity.CategoryName</td>
-        </tr>
+            <td>@switch(activity.CategoryID)
+                {
+                    case 1: activity.CategoryName = "Hygiene";
+                    break;
+                    case 2: activity.CategoryName = "Mental Health/Mindfulness";
+                    break;
+                    case 3: activity.CategoryName = "Physical Health/Fitness";
+                    break;
+                    case 4: activity.CategoryName = "Discipline";
+                    break;
+                    case 5: activity.CategoryName = "Learning/Education";
+                    break;
+                    case 6: activity.CategoryName = "Social";
+                    break;
+                    case 7: activity.CategoryName = "Financial";
+                    break;
+                    case 8: activity.CategoryName = "Spiritual";
+                    break; 
+                    default: activity.CategoryName = "Undefined";
+                    break; 
+                }
+                @activity.CategoryName
+            </td>
+            </tr>
     }
-    
 </table>

@@ -28,7 +28,7 @@ namespace AlwaysForward
         }
         public Activity GetActivity(int id)
         {
-            return _conn.QuerySingle<Activity>("SELECT * FROM ACTIVITIES WHERE ActivityID = @id;", 
+            return _conn.QueryFirstOrDefault<Activity>("SELECT * FROM ACTIVITIES WHERE ActivityID = @id;", 
                 new { id = id });
         }
        
@@ -53,8 +53,8 @@ namespace AlwaysForward
         }
         public void ActivityCompleteToggle(Activity activity)
         {
-            _conn.Execute("UPDATE activites SET complete = 1 WHERE ActivityID = @id;",
-                new { id = activity.ActivityID });
+            _conn.Execute("UPDATE activites SET complete = @isComplete WHERE ActivityID = @id;",
+                new { id = activity.ActivityID, isComplete = activity.IsCompleted});
         }
 
         //DELETE
