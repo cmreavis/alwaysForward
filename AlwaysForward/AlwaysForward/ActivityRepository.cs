@@ -1,6 +1,7 @@
 ﻿using AlwaysForward.Models;
 using Dapper;
 using System.Data;
+using System.Drawing.Design;
 
 namespace AlwaysForward
 {
@@ -27,9 +28,10 @@ namespace AlwaysForward
         }
         public Activity GetActivity(int id)
         {
-            return _conn.QuerySingle<Activity>("SELECT * FROM ACTIVITIES WHERE ActivityID = @id;", 
+            return _conn.QueryFirstOrDefault<Activity>("SELECT * FROM ACTIVITIES WHERE ActivityID = @id;", 
                 new { id = id });
         }
+       
         public IEnumerable<ActivityCategory> GetActivityCategories()
         {
             return _conn.Query<ActivityCategory>("SELECT * FROM categories;");
@@ -49,10 +51,10 @@ namespace AlwaysForward
             _conn.Execute("UPDATE activities SET Name = @activityName, Description = @description, CategoryID = @categoryID WHERE ActivityID = @id;", 
                 new { activityName = activity.Name, description = activity.Description, categoryID = activity.CategoryID, id = activity.ActivityID });
         }
-        public void ActivityComplete(Activity activity)
+        public void ActivityCompleteToggle(Activity activity)
         {
-            _conn.Execute("UPDATE activites SET complete = 1 WHERE ActivityID = @id;",
-                new { id = activity.ActivityID });
+            _conn.Execute("UPDATE activites SET complete = @isComplete WHERE ActivityID = @id;",
+                new { id = activity.ActivityID, isComplete = activity.IsCompleted});
         }
 
         //DELETE

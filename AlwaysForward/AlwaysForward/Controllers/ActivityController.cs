@@ -32,6 +32,11 @@ namespace AlwaysForward.Controllers
         public IActionResult Index()
         {
             var activities = repo.GetAllActivities();
+            Activity act = repo.AssignCategory();
+            foreach(var activ in activities)
+            {
+                activ.CategoryName = act.CategoryName;
+            }
             return View(activities);
         }
 
@@ -63,7 +68,16 @@ namespace AlwaysForward.Controllers
 
             return RedirectToAction("ViewActivity", new { id = act.ActivityID });
         }
-
+        public IActionResult ActivityCompleteToggle(int id)
+        {
+            var act = repo.GetActivity(id);
+            if (act != null)
+            {
+                act.IsCompleted = !act.IsCompleted;
+                repo.ActivityCompleteToggle(act);
+            }
+            return View("Index");
+        }
         //DELETE
         public IActionResult DeleteActivity(Activity act)
         {

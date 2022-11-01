@@ -11,6 +11,7 @@ namespace AlwaysForward
         public Activity GetActivity(int id);
         public void InsertActivity(Activity activityToInsert);
         public void UpdateActivity(Activity activity);
+        public void ActivityCompleteToggle(Activity activity);
         public Activity AssignCategory();
         public void DeleteActivity(Activity activity);
 
