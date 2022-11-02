@@ -76,9 +76,11 @@ namespace AlwaysForward.Controllers
 
             return RedirectToAction("Index");
         }
-        public IActionResult CompleteActivity(Activity act)
+        public IActionResult CompleteActivity(Activity actToComplete)
         {
-            repo.
+            repo.CompleteActivity(actToComplete);
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -14,7 +14,6 @@
         <th>Name</th>
         <th>Description</th>
         <th>Category</th>
-
     </tr>
     <tr>
         <td>@Model.Name</td>
@@ -51,10 +50,20 @@
                     break;
             }
             @Model.CategoryName
-        </td>        
+        </td>   
     </tr>
 </table>
-
+<div class="buttons-complete" style="display: inline-block">
+    @using (Html.BeginForm("CompleteActivity", "Activity", "Post"))
+    {
+        <input type="hidden" asp-for="ActivityID" value="@Model.ActivityID" />
+        <input type="hidden" asp-for="Name" value="@Model.Name" />
+        <input type="hidden" asp-for="Description" value="@Model.Description" />
+        <input type="hidden" asp-for="CategoryID" value="@Model.CategoryID" />
+        <input type="submit" onclick="return confirm('Complete this task and add it to the list of finished activities?')" 
+            value="Finished this task?" />
+    }
+</div>
 
 <div class="buttons-delete" style="display: block">
     @using (Html.BeginForm("DeleteActivity", "Activity", "Post"))

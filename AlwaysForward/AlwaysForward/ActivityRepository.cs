@@ -64,7 +64,7 @@ namespace AlwaysForward
         }
         public void CompleteActivity(Activity actToComplete)
         {
-            _conn.Execute("INSERT INTO completed VALUES ('@id', '@name', '@description', '@categoryid');",
+            _conn.Execute("INSERT INTO completed VALUES (@id, @name, @description, @categoryid);",
                 new { id = actToComplete.ActivityID, name = actToComplete.Name, description = actToComplete.Description, categoryid = actToComplete.CategoryID });     
             _conn.Execute("DELETE FROM activities WHERE ActivityID = @id;",
                 new { id = actToComplete.ActivityID });
