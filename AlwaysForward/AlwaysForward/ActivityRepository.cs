@@ -1,6 +1,8 @@
 ﻿using AlwaysForward.Models;
+using Activity = AlwaysForward.Models.Activity;
 using Dapper;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing.Design;
 
 namespace AlwaysForward
@@ -17,7 +19,7 @@ namespace AlwaysForward
         //CREATE
         public void InsertActivity(Activity activityToInsert)
         {
-            _conn.Execute("INSERT INTO ACTIVITIES (Name, Description, Complete, CategoryID) VALUES (@activityName, @description, 0, @categoryID );",
+            _conn.Execute("INSERT INTO ACTIVITIES (Name, Description, CategoryID) VALUES (@activityName, @description, @categoryID );",
                 new { activityName = activityToInsert.Name, description = activityToInsert.Description, categoryID = activityToInsert.CategoryID });
         }
 
@@ -25,6 +27,10 @@ namespace AlwaysForward
         public IEnumerable<Activity> GetAllActivities()
         {
             return _conn.Query<Activity>("SELECT * FROM ACTIVITIES;");
+        }
+        public IEnumerable<Activity> GetCompletedActivities()
+        {
+            return _conn.Query<Activity>("SELECT * FROM COMPLETED;");
         }
         public Activity GetActivity(int id)
         {
@@ -36,8 +42,6 @@ namespace AlwaysForward
         {
             return _conn.Query<ActivityCategory>("SELECT * FROM categories;");
         }
-
-
         //UPDATE
         public Activity AssignCategory()
         {
@@ -51,11 +55,6 @@ namespace AlwaysForward
             _conn.Execute("UPDATE activities SET Name = @activityName, Description = @description, CategoryID = @categoryID WHERE ActivityID = @id;", 
                 new { activityName = activity.Name, description = activity.Description, categoryID = activity.CategoryID, id = activity.ActivityID });
         }
-        public void ActivityCompleteToggle(Activity activity)
-        {
-            _conn.Execute("UPDATE activites SET complete = @isComplete WHERE ActivityID = @id;",
-                new { id = activity.ActivityID, isComplete = activity.IsCompleted});
-        }
 
         //DELETE
         public void DeleteActivity(Activity activity)
@@ -63,7 +62,12 @@ namespace AlwaysForward
             _conn.Execute("DELETE FROM activities WHERE ActivityID = @id;", 
                 new { id = activity.ActivityID });
         }
-
-
+        public void CompleteActivity(Activity actToComplete)
+        {
+            _conn.Execute("INSERT INTO completed VALUES ('@id', '@name', '@description', '@categoryid');",
+                new { id = actToComplete.ActivityID, name = actToComplete.Name, description = actToComplete.Description, categoryid = actToComplete.CategoryID });     
+            _conn.Execute("DELETE FROM activities WHERE ActivityID = @id;",
+                new { id = actToComplete.ActivityID });
+        }
     }
 }

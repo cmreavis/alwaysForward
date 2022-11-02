@@ -16,7 +16,7 @@
     <input type="text" name="Name" class="form-control" value="@Model.Name" />
 
     <label asp-for="Description" class="control-label">Description</label>    
-    <input type="text" step="0.01" name="Description" class="form-control" value="@Model.Description" />
+    <input type="text" step="0.01" name="Description" class="description-field" value="@Model.Description" />
 
     <div class="form-group">
         <label for="CategoryID">Category</label>
@@ -28,5 +28,5 @@
         </select>
     </div>
 
-    <input type="submit" value="Update Activity" class="btn btn-primary" />
+    <input type="submit" value="Submit" class="btn btn-primary" />
 }

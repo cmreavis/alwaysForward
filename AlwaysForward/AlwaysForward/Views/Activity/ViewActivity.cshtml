@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = $"{@Model.Name}";
 }
 
@@ -7,28 +6,62 @@
 
 @model Activity
 <h3>@Model.Name</h3>
-
+<div class="buttons-update">
+    <a class="buttontext" href="/Activity/UpdateActivity/@Model.ActivityID">Update Task?</a>
+</div>
 <table class="table">
     <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Category</th>
+
     </tr>
     <tr>
         <td>@Model.Name</td>
         <td>@Model.Description</td>
-        <td>@Model.CategoryID</td>
+        <td>
+            @switch (Model.CategoryID)
+            {
+                case 1:
+                    Model.CategoryName = "Hygiene";
+                    break;
+                case 2:
+                    Model.CategoryName = "Mental Health/Mindfulness";
+                    break;
+                case 3:
+                    Model.CategoryName = "Physical Health/Fitness";
+                    break;
+                case 4:
+                    Model.CategoryName = "Discipline";
+                    break;
+                case 5:
+                    Model.CategoryName = "Learning/Education";
+                    break;
+                case 6:
+                    Model.CategoryName = "Social";
+                    break;
+                case 7:
+                    Model.CategoryName = "Financial";
+                    break;
+                case 8:
+                    Model.CategoryName = "Spiritual";
+                    break;
+                default:
+                    Model.CategoryName = "Undefined";
+                    break;
+            }
+            @Model.CategoryName
+        </td>        
     </tr>
 </table>
 
-<div style="display: block">
-    <a href="/Activity/UpdateActivity/@Model.ActivityID">Update Task?</a>    
-</div>
 
-<div style="display: block">
+<div class="buttons-delete" style="display: block">
     @using (Html.BeginForm("DeleteActivity", "Activity", "Post"))
     {
         <input type="hidden" asp-for="ActivityID" value="@Model.ActivityID" />
         <input type="submit" onclick="return confirm('Delete this task?')" value="Delete this task" />
     }
 </div>
+
+

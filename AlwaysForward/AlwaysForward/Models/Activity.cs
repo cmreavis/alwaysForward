@@ -18,7 +18,6 @@ namespace AlwaysForward.Models
         [MinLength(2, ErrorMessage = "Name must contain two or more characters.")]
         [MaxLength(200, ErrorMessage = "Name cannot contain more than 200 characters.")]
         public string Name { get; set; }
-        public bool IsCompleted { get; set; }
         
     }
 }
