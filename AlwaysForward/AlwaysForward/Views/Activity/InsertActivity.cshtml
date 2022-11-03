@@ -16,10 +16,10 @@
                 <input asp-for="ActivityID" type="hidden" value="" />
 
                 <label asp-for="Name" class="col-6 col-12-xsmall">Name</label>
-                <input type="text" name="Name" class="form-control" value="" />
+                <input type="text" name="Name" class="form-control" value="" minlength="3" required />
 
                 <label asp-for="Description" class="col-12">Description</label>
-                <input type="text" step="0.01" name="Description" class="form-control" />
+                <input type="text" step="0.01" name="Description" class="form-control" value=" " />
 
                 <div class="col-12">
                     <label for="">Select a Category</label>
