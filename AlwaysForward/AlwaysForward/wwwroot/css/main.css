@@ -3020,6 +3020,8 @@ input, select, textarea {
 
 		table td {
 			padding: 0.75rem 0.75rem;
+			inline-size: 300px;
+			overflow-wrap: break-word;
 		}
 
 		table th {
@@ -3031,6 +3033,8 @@ input, select, textarea {
 			padding: 0 0.75rem 0.75rem 0.75rem;
 			text-align: center;
 			text-transform: uppercase;
+			inline-size: 150px;
+			overflow-wrap: break-word;
 		}
 
 			@media screen and (max-width: 980px) {

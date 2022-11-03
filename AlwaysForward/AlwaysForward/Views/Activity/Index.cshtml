@@ -7,7 +7,6 @@
 
 <div id="main">
 
-    <!-- Featured Post -->
     <article class="post featured">
         <header class="major">
             <span class="date">@DateTime.Now.ToString("MM/dd/yyyy h:mm tt")</span>
@@ -19,18 +18,19 @@
             </h2>
             <p>(Hint: you can click on the name of each task you have created to make changes and mark it as complete!)</p>
         </header>
-        <table class="task-table">
+        <div class="table-wrapper">
+            <table class="alt">
             <tr>
-                <th class="task-header">Name</th>
-                <th class ="task-header">Description</th>
-                <th class="task-header">Category</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
             </tr>
 
             @foreach (var activity in @Model)
             {
                 <tr>
 
-                    <td><a class="checkbox-text" href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a></td>
+                    <td><a href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a></td>
                     <td>@activity.Description</td>
                     <td>
                         @switch (activity.CategoryID)
@@ -67,14 +67,12 @@
                     </td>
                 </tr>
             }
-        </table>
-        <a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
-        <ul class="actions special">
-            <li><a href="#" class="button large">Full Story</a></li>
-        </ul>
+            </table>
+            <ul class="actions fit">
+                <li><a class="button primary fit" href="/Activity/InsertActivity/">Add a new Task</a></li>
+            </ul>
+        </div>
     </article>
 </div>
 
-<div class="buttons-addtask">
-    <a class="buttontext" href="/Activity/InsertActivity/">Add a new Task?</a>
-</div>
+
