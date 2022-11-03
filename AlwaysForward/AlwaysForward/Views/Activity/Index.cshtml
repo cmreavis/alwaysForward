@@ -1,50 +1,78 @@
-﻿@model IEnumerable<Activity>
+﻿@{
+    ViewData["Title"] = "Always Forward | Habit Tracker";
+    Layout = "../Shared/_OtherLayout.cshtml";
+}
 
-<h2 class="list-header">Your Daily Tasks</h2>
+@model IEnumerable<Activity>
 
+<div id="main">
 
-<table class="task-table">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th></th>
-    </tr>
-
-    @foreach (var activity in @Model)
-    {
-        <tr>
-            
-            <td><a class="checkbox-text" href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a></td>
-            <td>@activity.Description</td>
-            <td>@switch(activity.CategoryID)
-                {
-                    case 1: activity.CategoryName = "Hygiene";
-                    break;
-                    case 2: activity.CategoryName = "Mental Health/Mindfulness";
-                    break;
-                    case 3: activity.CategoryName = "Physical Health/Fitness";
-                    break;
-                    case 4: activity.CategoryName = "Discipline";
-                    break;
-                    case 5: activity.CategoryName = "Learning/Education";
-                    break;
-                    case 6: activity.CategoryName = "Social";
-                    break;
-                    case 7: activity.CategoryName = "Financial";
-                    break;
-                    case 8: activity.CategoryName = "Spiritual";
-                    break; 
-                    default: activity.CategoryName = "Undefined";
-                    break; 
-                }
-                @activity.CategoryName
-            </td>
-                
+    <article class="post featured">
+        <header class="major">
+            <span class="date">@DateTime.Now.ToString("MM/dd/yyyy h:mm tt")</span>
+            <h2>
+                <a href="#">
+                    Here are your tasks<br />
+                    so far:
+                </a>
+            </h2>
+            <p>(Hint: you can click on the name of each task you have created to make changes and mark it as complete!)</p>
+        </header>
+        <div class="table-wrapper">
+            <table class="alt">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
             </tr>
-    }
-</table>
 
-<div class="buttons-addtask">
-    <a class="buttontext" href="/Activity/InsertActivity/">Add a new Task?</a>
+            @foreach (var activity in @Model)
+            {
+                <tr>
+
+                    <td><a href=/Activity/ViewActivity/@activity.ActivityID>@activity.Name</a></td>
+                    <td>@activity.Description</td>
+                    <td>
+                        @switch (activity.CategoryID)
+                        {
+                            case 1:
+                                activity.CategoryName = "Hygiene";
+                                break;
+                            case 2:
+                                activity.CategoryName = "Mental Health/Mindfulness";
+                                break;
+                            case 3:
+                                activity.CategoryName = "Physical Health/Fitness";
+                                break;
+                            case 4:
+                                activity.CategoryName = "Discipline";
+                                break;
+                            case 5:
+                                activity.CategoryName = "Learning/Education";
+                                break;
+                            case 6:
+                                activity.CategoryName = "Social";
+                                break;
+                            case 7:
+                                activity.CategoryName = "Financial";
+                                break;
+                            case 8:
+                                activity.CategoryName = "Spiritual";
+                                break;
+                            default:
+                                activity.CategoryName = "Undefined";
+                                break;
+                        }
+                        @activity.CategoryName
+                    </td>
+                </tr>
+            }
+            </table>
+            <ul class="actions fit">
+                <li><a class="button primary fit" href="/Activity/InsertActivity/">Add a new Task</a></li>
+            </ul>
+        </div>
+    </article>
 </div>
+
+

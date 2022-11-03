@@ -1,32 +1,40 @@
 ﻿
 @{
     ViewData["Title"] = $"{@Model.Name}";
+    Layout = "../Shared/_OtherLayout.cshtml";
 }
 
 
 @model Activity
 
-<h2>Update "@Model.Name"</h2>
-
-@using (Html.BeginForm("UpdateActivityToDatabase", "Activity", "Post"))
-{
-    <input asp-for="ActivityID" type="hidden" value="@Model.ActivityID" />
-
-    <label asp-for="Name" class="control-label">Name</label>
-    <input type="text" name="Name" class="form-control" value="@Model.Name" />
-
-    <label asp-for="Description" class="control-label">Description</label>    
-    <input type="text" step="0.01" name="Description" class="description-field" value="@Model.Description" />
-
-    <div class="form-group">
-        <label for="CategoryID">Category</label>
-        <select class="form-control-sm" name="CategoryID" value="@Model.CategoryID">
-            @foreach (var cat in Model.Categories)
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="main">
+            <h2>Updating "@Model.Name"</h2>
+            
+            @using (Html.BeginForm("UpdateActivityToDatabase", "Activity", "Post"))
             {
-                <option value="@cat.CategoryID">@cat.CategoryID @cat.Name</option>
-            }
-        </select>
-    </div>
+                <input asp-for="ActivityID" type="hidden" value="@Model.ActivityID" />
 
-    <input type="submit" value="Submit" class="btn btn-primary" />
-}
+                <label asp-for="Name" class="control-label">Name</label>
+                <input type="text" name="Name" class="form-control" value="@Model.Name" />
+
+                <label asp-for="Description" class="control-label">Description</label>    
+                <input type="text" step="0.01" name="Description" class="description-field" value="@Model.Description" />
+
+                <div class="form-group">
+                    <label for="CategoryID">Category</label>
+                    <select class="form-control-sm" name="CategoryID" value="@Model.CategoryID">
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <option value="@cat.CategoryID">@cat.CategoryID @cat.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <input type="submit" value="Submit" class="button primary fit" />
+            }
+
+        </div>
+    </div>
+</body>

@@ -39,7 +39,16 @@ namespace AlwaysForward.Controllers
             }
             return View(activities);
         }
-
+        public IActionResult Completed()
+        {
+            var completedActs = repo.GetCompletedActivities();
+            Activity act = repo.AssignCategory();
+            foreach(var activ in completedActs)
+            {
+                activ.CategoryName = act.CategoryName;
+            }
+            return View(completedActs);
+        }
         public IActionResult ViewActivity(int id)
         {
             var activity = repo.GetActivity(id);

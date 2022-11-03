@@ -1,14 +1,14 @@
 ﻿@{
     ViewData["Title"] = $"{@Model.Name}";
+    Layout = "../Shared/_OtherLayout.cshtml";
 }
 
-<h1>Task View</h1>
-
 @model Activity
-<h3>@Model.Name</h3>
-<div class="buttons-update">
-    <a class="buttontext" href="/Activity/UpdateActivity/@Model.ActivityID">Update Task?</a>
-</div>
+
+<div id="main">
+    <article class="post featured">
+
+    
 <table class="table">
     <tr>
         <th>Name</th>
@@ -53,24 +53,28 @@
         </td>   
     </tr>
 </table>
-<div class="buttons-complete" style="display: inline-block">
-    @using (Html.BeginForm("CompleteActivity", "Activity", "Post"))
-    {
-        <input type="hidden" asp-for="ActivityID" value="@Model.ActivityID" />
-        <input type="hidden" asp-for="Name" value="@Model.Name" />
-        <input type="hidden" asp-for="Description" value="@Model.Description" />
-        <input type="hidden" asp-for="CategoryID" value="@Model.CategoryID" />
-        <input type="submit" onclick="return confirm('Complete this task and add it to the list of finished activities?')" 
-            value="Finished this task?" />
-    }
+        <div>
+            @using (Html.BeginForm("CompleteActivity", "Activity", "Post"))
+            {
+                <input type="hidden" asp-for="ActivityID" value="@Model.ActivityID" />
+                <input type="hidden" asp-for="Name" value="@Model.Name" />
+                <input type="hidden" asp-for="Description" value="@Model.Description" />
+                <input type="hidden" asp-for="CategoryID" value="@Model.CategoryID" />
+                <input class="button primary fit" type="submit" onclick="return confirm('Complete this task and add it to the list of finished activities?')"
+                   value="Finished?" />
+            }
+        </div>
+
+<ul class="actions">
+        
+        <li><a class="button primary fit small" href="/Activity/UpdateActivity/@Model.ActivityID">Update</a></li>
+        
+        @using (Html.BeginForm("DeleteActivity", "Activity", "Post"))
+        {
+            <input type="hidden" asp-for="ActivityID" value="@Model.ActivityID" />
+            <li><input class="button fit small" type="submit" onclick="return confirm('Delete this task?')" value="Delete" /></li>
+        }
+
+</ul>
+    </article>
 </div>
-
-<div class="buttons-delete" style="display: block">
-    @using (Html.BeginForm("DeleteActivity", "Activity", "Post"))
-    {
-        <input type="hidden" asp-for="ActivityID" value="@Model.ActivityID" />
-        <input type="submit" onclick="return confirm('Delete this task?')" value="Delete this task" />
-    }
-</div>
-
-
