@@ -7,7 +7,7 @@ as well as mindfulness/therapeutic elements that I am interested in.
 
 # functionality
 ability to create tasks for daily use, edit existing tasks, mark tasks as completed\
-reflected in MySQL database.
+reflected in local MySQL database.
 
 # future plans, ideas
 user logins, sign in w/ Apple, Google, Meta, etc\
