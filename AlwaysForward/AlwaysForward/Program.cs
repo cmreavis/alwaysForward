@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IDbConnection>((s) =>
 {
-    IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("alwaysforward"));
+    IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("alwaysforwardazure"));
     conn.Open();
     return conn;
 });
